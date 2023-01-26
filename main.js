@@ -60,12 +60,7 @@
 
 // })
 
-const weatherWidget = document.createElement('div');
-    const propertiesList = document.createElement('ul');
-        const locationTemp = document.createElement('li');
-        const locationCity = document.createElement('li');
-        const locationState = document.createElement('li');
-    const weatherImg = document.createElement('img');
+
 
 // propertiesList.appendChild(locationTemp);
 // propertiesList.appendChild(locationCity);
@@ -75,10 +70,32 @@ const weatherWidget = document.createElement('div');
 // const headerBar = document.getElementById('start');
 // headerBar.appendChild(weatherWidget);
 
-document.addEventListener('DOMContentLoaded', function () {
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Target div on the Youtube page
+//     const headerBar = document.getElementById('start'); 
+
+//     const weatherWidget = document.createElement('div');
+//     const weatherImg = document.createElement('img');
+//     const propertiesList = document.createElement('ul');
+//         const locationTemp = document.createElement('li');
+//         const locationCity = document.createElement('li');
+//         const locationState = document.createElement('li');
+    
+//         weatherWidget.setAttribute('id', 'weatherWidget');
+//         locationState.src = '';
+
+//         propertiesList.appendChild(locationTemp);
+//         propertiesList.appendChild(locationCity);
+//         propertiesList.appendChild(locationState);
+//     weatherWidget.appendChild(propertiesList);
+//     weatherWidget.appendChild(weatherImg);
+//     console.log(weatherWidget);
+// headerBar.appendChild(weatherWidget);
 
     document.getElementById("submit").addEventListener("click", function () {
-
+        
         if (!document.getElementById('zipCode').value) alert('Enter a zip!')
 
         const zipCode = document.getElementById('zipCode').value;
@@ -86,22 +103,116 @@ document.addEventListener('DOMContentLoaded', function () {
         fetch(`http://api.weatherapi.com/v1/current.json?key=e9049b8544804eaa98b15213232601&q=${zipCode}&aqi=no`)
             .then(response => response.json())
             .then(data => {
-                locationCity.innerText = data.location.name;
-                locationState.innerText = data.location.region;
-                temp.innerText = data.current['temp_f'];
-                weatherImg.src = data.current.condition.icon;
+                
+
+                // locationCity.innerText = data.location.name;
+                // locationState.innerText = data.location.region;
+                // temp.innerText = data.current['temp_f'];
+                // weatherImg.src = data.current.condition.icon;
+
+                let city = data.location.name;
+                let state = data.location.region;
+                let temp = data.current['temp_f'];
+                let img = data.current.condition.icon;                        
+
+                alert(`${city}, ${state}, ${temp}F, ${img}`)
+                //generateWeatherWidget(temp, city, state, img);
+
+                
+                const locationTemp = document.querySelector('#locationTemp');
+                const locationCity = document.querySelector('#locationCity');
+                const locationState = document.querySelector('#locationState');
+                const weatherImg = document.querySelector('#weatherImg');
+                locationTemp.innerText = temp;
+                locationCity.innerText = city;
+                locationState.innerText = state;
+                weatherImg.src = img;
+
+
+                // // Target div on the Youtube page
+                // const headerBar = document.getElementById('start'); 
+                                
+                                
+                // const weatherWidget = document.createElement('div');
+                //     const weatherImg = document.createElement('img');
+                //     const propertiesList = document.createElement('ul');
+                //         const locationTemp = document.createElement('li');
+                //         const locationCity = document.createElement('li');
+                //         const locationState = document.createElement('li');
+                    
+                        // weatherWidget.setAttribute('id', 'weatherWidget');
+                        // locationTemp.innerText = temp;
+                        // locationCity.innerText = city;
+                        // locationState.innerText = state;
+                        // weatherImg.src = img;
+                        
+                //         propertiesList.appendChild(locationTemp);
+                //         propertiesList.appendChild(locationCity);
+                //         propertiesList.appendChild(locationState);
+                //     weatherWidget.appendChild(propertiesList);
+                //     weatherWidget.appendChild(weatherImg);
+                //     console.log(weatherWidget);
+                // headerBar.appendChild(weatherWidget);
+
+                
             });
+            
     })
+
 });
 
+function generateWeatherWidget (temp = 'temp', city = 'city', state = 'state', img = 'https://www.freeiconspng.com/uploads/cloud-icon-8.png') {
+// Target div on the Youtube page
+const headerBar = document.getElementById('start'); 
+                
+                
+const weatherWidget = document.createElement('div');
+    const weatherImg = document.createElement('img');
+    const propertiesList = document.createElement('ul');
+        const locationTemp = document.createElement('li');
+        const locationCity = document.createElement('li');
+        const locationState = document.createElement('li');
+    
+        weatherWidget.setAttribute('id', 'weatherWidget');
+        locationTemp.setAttribute('id', 'locationTemp');
+        locationCity.setAttribute('id', 'locationCity');
+        locationState.setAttribute('id', 'locationState');
+        weatherImg.setAttribute('id', 'weatherImg');
+
+        locationTemp.innerText = temp;
+        locationCity.innerText = city;
+        locationState.innerText = state;
+        weatherImg.src = img;
+
+        propertiesList.appendChild(locationTemp);
+        propertiesList.appendChild(locationCity);
+        propertiesList.appendChild(locationState);
+    weatherWidget.appendChild(propertiesList);
+    weatherWidget.appendChild(weatherImg);
+    console.log(weatherWidget);
+ headerBar.appendChild(weatherWidget);    
+}
+// // Target div on the Youtube page
+// const headerBar = document.getElementById('start'); 
+                
+                
+// const weatherWidget = document.createElement('div');
+//     const weatherImg = document.createElement('img');
+//     const propertiesList = document.createElement('ul');
+//         const locationTemp = document.createElement('li');
+//         const locationCity = document.createElement('li');
+//         const locationState = document.createElement('li');
+    
+//         weatherWidget.setAttribute('id', 'weatherWidget');
+
+//         propertiesList.appendChild(locationTemp);
+//         propertiesList.appendChild(locationCity);
+//         propertiesList.appendChild(locationState);
+//     weatherWidget.appendChild(propertiesList);
+//     weatherWidget.appendChild(weatherImg);
+//     console.log(weatherWidget);
+//  headerBar.appendChild(weatherWidget);
+
+generateWeatherWidget();
 
 
-alert(`${data.location.name}, ${data.location.region}, ${data.current['temp_f']}F, ${data.current.condition.icon}`)
-
-propertiesList.appendChild(locationTemp);
-propertiesList.appendChild(locationCity);
-propertiesList.appendChild(locationState);
-weatherWidget.appendChild(propertiesList);
-weatherWidget.appendChild(weatherImg);
-const headerBar = document.getElementById('start');
-headerBar.appendChild(weatherWidget);
