@@ -1,0 +1,31 @@
+{
+
+    "manifest_version": 3,
+    "name": "weather Buddy",
+    "version": "1.0.0",
+  
+
+    "action": {
+        "default_icon": {
+        "16": "/images/smiling-sun.jpg",
+        "24": "/images/smiling-sun.jpg",
+        "32": "/images/smiling-sun.jpg"
+        },
+        "default_title": "Click Me",
+        "default_popup": "index.html"
+    },
+
+    "description": "Add a weather widget to your Youtube header",
+    "icons": {
+        "16": "/images/smiling-sun.jpg",
+        "32": "/images/smiling-sun.jpg",
+        "48": "/images/smiling-sun.jpg",
+        "128": "/images/smiling-sun.jpg"
+    },
+
+    "content_scripts": [{
+        "matches": ["https://www.youtube.com/*"],
+        "css": ["styles.css"],
+        "js": ["main.js"]
+    }]
+  }

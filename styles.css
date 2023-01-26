@@ -1,0 +1,10 @@
+#square {
+    background: rgb(93, 0, 255);
+    width: 100px;
+    height: 100px;
+    margin: 50px auto;
+    color: white;
+    
+    font-size: 20px;
+    text-align: center;
+}
